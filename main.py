@@ -49,7 +49,7 @@ class LLMClassifier:
                 time.sleep(retry_delay)
         raise Exception(f"Max retries reached. Could not classify title: {title}")
     
-     def translate(self, text, target_language='zh-cn', max_retries=5, retry_delay=2):
+    def translate(self, text, target_language='zh-cn', max_retries=5, retry_delay=2):
         translator = Translator()
         retries = 0
         

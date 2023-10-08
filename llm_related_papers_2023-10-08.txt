@@ -1,0 +1,85 @@
+1. Title: Deciphering Diagnoses: How Large Language Models Explanations Influence  Clinical Decision Making
+   Link: https://arxiv.org/abs/2310.01708
+   Classification Answer: yes
+
+   Abstract: Clinical Decision Support Systems (CDSS) utilize evidence-based knowledge and patient data to offer real-time recommendations, with Large Language Models (LLMs) emerging as a promising tool to generate plain-text explanations for medical decisions. This study explores the effectiveness and reliability of LLMs in generating explanations for diagnoses based on patient complaints. Three experienced doctors evaluated LLM-generated explanations of the connection between patient complaints and doctor and model-assigned diagnoses across several stages. Experimental results demonstrated that LLM explanations significantly increased doctors' agreement rates with given diagnoses and highlighted potential errors in LLM outputs, ranging from 5% to 30%. The study underscores the potential and challenges of LLMs in healthcare and emphasizes the need for careful integration and evaluation to ensure patient safety and optimal clinical utility.
+
+  Translated Abstract: 临床决策支持系统（CDSS）利用基于证据的知识和患者数据来提供实时建议，并以大型语言模型（LLM）作为有前途的工具来生成医疗决策的简单文本说明。这项研究探讨了LLMS在基于患者投诉的诊断解释中的有效性和可靠性。三名经验丰富的医生评估了LLM生成的解释，解释了患者投诉与医生之间的联系以及在几个阶段进行模型分配的诊断。实验结果表明，LLM的解释显着提高了医生与给定诊断的一致性率，并突出了LLM产量的潜在错误，范围从5％到30％。该研究强调了LLM在医疗保健中的潜力和挑战，并强调需要仔细整合和评估，以确保患者的安全性和最佳临床效用。
+
+
+2. Title: Closing the Curious Case of Neural Text Degeneration
+   Link: https://arxiv.org/abs/2310.01693
+   Classification Answer: yes
+
+   Abstract: Despite their ubiquity in language generation, it remains unknown why truncation sampling heuristics like nucleus sampling are so effective. We provide a theoretical explanation for the effectiveness of the truncation sampling by proving that truncation methods that discard tokens below some probability threshold (the most common type of truncation) can guarantee that all sampled tokens have nonzero true probability. However, thresholds are a coarse heuristic, and necessarily discard some tokens with nonzero true probability as well. In pursuit of a more precise sampling strategy, we show that we can leverage a known source of model errors, the softmax bottleneck, to prove that certain tokens have nonzero true probability, without relying on a threshold. Based on our findings, we develop an experimental truncation strategy and the present pilot studies demonstrating the promise of this type of algorithm. Our evaluations show that our method outperforms its threshold-based counterparts under automatic and human evaluation metrics for low-entropy (i.e., close to greedy) open-ended text generation. Our theoretical findings and pilot experiments provide both insight into why truncation sampling works, and make progress toward more expressive sampling algorithms that better surface the generative capabilities of large language models.
+
+  Translated Abstract: 尽管在语言产生中无处不在，但尚不清楚为什么截短采样启发式启发式方法（如核采样）如此有效。我们通过证明将截断方法丢弃以下的截断方法（最常见的截断类型）可以保证所有采样代币具有非零的真实概率，从而为截断采样的有效性提供了理论上的解释。但是，阈值是一种粗糙的启发式，并且必然会丢弃某些具有非零真实概率的令牌。为了采用更精确的采样策略，我们表明我们可以利用已知的模型错误来源，即SoftMax瓶颈，以证明某些令牌具有非零的真实概率，而无需依赖阈值。根据我们的发现，我们制定了一种实验性截断策略，目前的试点研究证明了这种算法的希望。我们的评估表明，我们的方法在自动和人类评估指标下的低渗透率（即接近贪婪的）开放式文本生成以上的基于阈值的同行。我们的理论发现和试点实验既可以洞察截断采样的作用，并在更具表现力的采样算法方面取得了进步，从而更好地表现出大型语言模型的生成能力。
+
+
+3. Title: Zero-Shot Continuous Prompt Transfer: Generalizing Task Semantics Across  Language Models
+   Link: https://arxiv.org/abs/2310.01691
+   Classification Answer: yes
+
+   Abstract: Prompt tuning in natural language processing (NLP) has become an increasingly popular method for adapting large language models to specific tasks. However, the transferability of these prompts, especially continuous prompts, between different models remains a challenge. In this work, we propose a zero-shot continuous prompt transfer method, where source prompts are encoded into relative space and the corresponding target prompts are searched for transferring to target models. Experimental results confirm the effectiveness of our method, showing that 'task semantics' in continuous prompts can be generalized across various language models. Moreover, we find that combining 'task semantics' from multiple source models can further enhance the generalizability of transfer.
+
+  Translated Abstract: 迅速进行自然语言处理（NLP）已成为一种越来越流行的方法，可以将大型语言模型调整为特定任务。但是，在不同模型之间，这些提示，尤其是连续提示的可传递性仍然是一个挑战。在这项工作中，我们提出了一个零射击连续提示传输方法，其中源提示被编码为相对空间，并搜索相应的目标提示以转移到目标模型。实验结果证实了我们方法的有效性，表明可以在各种语言模型中推广“任务语义”。此外，我们发现，从多个源模型组合“任务语义”可以进一步增强转移的普遍性。
+
+
+4. Title: Making Retrieval-Augmented Language Models Robust to Irrelevant Context
+   Link: https://arxiv.org/abs/2310.01558
+   Classification Answer: yes
+
+   Abstract: Retrieval-augmented language models (RALMs) hold promise to produce language understanding systems that are are factual, efficient, and up-to-date. An important desideratum of RALMs, is that retrieved information helps model performance when it is relevant, and does not harm performance when it is not. This is particularly important in multi-hop reasoning scenarios, where misuse of irrelevant evidence can lead to cascading errors. However, recent work has shown that retrieval augmentation can sometimes have a negative effect on performance. In this work, we present a thorough analysis on five open-domain question answering benchmarks, characterizing cases when retrieval reduces accuracy. We then propose two methods to mitigate this issue. First, a simple baseline that filters out retrieved passages that do not entail question-answer pairs according to a natural language inference (NLI) model. This is effective in preventing performance reduction, but at a cost of also discarding relevant passages. Thus, we propose a method for automatically generating data to fine-tune the language model to properly leverage retrieved passages, using a mix of relevant and irrelevant contexts at training time. We empirically show that even 1,000 examples suffice to train the model to be robust to irrelevant contexts while maintaining high performance on examples with relevant ones.
+
+  Translated Abstract: 检索授权的语言模型（RALMS）有望产生真实，高效且最新的语言理解系统。RALMS的一个重要的逃亡者是，检索到的信息在相关时有助于模型性能，并且在不相关时不会损害性能。这在多跳的推理方案中尤其重要，因为滥用无关的证据可能会导致级联错误。但是，最近的工作表明，检索增加有时会对绩效产生负面影响。在这项工作中，我们对五个开放域问题进行了彻底的分析，以回答基准，以表征检索降低准确性时的情况。然后，我们提出了两种减轻此问题的方法。首先，一个简单的基线滤除了根据自然语言推断（NLI）模型不需要问答的段落。这有效地防止降低性能，但还付出了相关段落的代价。因此，我们提出了一种自动生成数据以微调语言模型以正确利用所检索的段落的方法，并在训练时使用相关和无关紧要的环境。我们从经验上表明，即使有1,000个例子就足以训练模型，以与无关紧要的环境保持稳健，同时在具有相关示例的示例上保持高性能。
+
+
+5. Title: LLM Lies: Hallucinations are not Bugs, but Features as Adversarial  Examples
+   Link: https://arxiv.org/abs/2310.01469
+   Classification Answer: yes
+
+   Abstract: Large Language Models (LLMs), including GPT-3.5, LLaMA, and PaLM, seem to be knowledgeable and able to adapt to many tasks. However, we still can not completely trust their answer, since LLMs suffer from hallucination--fabricating non-existent facts to cheat users without perception. And the reasons for their existence and pervasiveness remain unclear. In this paper, we demonstrate that non-sense prompts composed of random tokens can also elicit the LLMs to respond with hallucinations. This phenomenon forces us to revisit that hallucination may be another view of adversarial examples, and it shares similar features with conventional adversarial examples as the basic feature of LLMs. Therefore, we formalize an automatic hallucination triggering method as the hallucination attack in an adversarial way. Finally, we explore basic feature of attacked adversarial prompts and propose a simple yet effective defense strategy. Our code is released on GitHub.
+
+  Translated Abstract: 包括GPT-3.5，Llama和Palm在内的大型语言模型（LLMS）似乎知识渊博，并且能够适应许多任务。但是，我们仍然无法完全相信他们的答案，因为LLMS遭受了幻觉的困扰 - 使不存在的事实欺骗用户而没有感知。而且其存在和普遍性的原因尚不清楚。在本文中，我们证明了由随机代币组成的非义提示也可以引起LLMs以幻觉的反应。这种现象迫使我们重新审视幻觉可能是对抗性例子的另一种观点，并且它与常规的对抗示例共享相似的特征，作为LLMS的基本特征。因此，我们以对抗性方式将自动幻觉触发方法形式化为幻觉攻击。最后，我们探讨了受攻击的对抗提示的基本特征，并提出了一种简单而有效的防御策略。我们的代码在Github上发布。
+
+
+6. Title: The Entity-Deduction Arena: A playground for probing the conversational  reasoning and planning capabilities of LLMs
+   Link: https://arxiv.org/abs/2310.01468
+   Classification Answer: yes
+
+   Abstract: Large language models (LLMs) are effective at answering questions that are clearly asked. However, when faced with ambiguous queries they can act unpredictably and produce incorrect outputs. This underscores the need for the development of intelligent agents capable of asking clarification questions to resolve ambiguities effectively. This capability requires complex understanding, state tracking, reasoning and planning over multiple conversational turns. However, directly measuring this can be challenging. In this paper, we offer a surrogate problem which assesses an LLMs's capability to deduce an entity unknown to itself, but revealed to a judge, by asking the judge a series of queries. This entity-deducing game can serve as an evaluation framework to probe the conversational reasoning and planning capabilities of language models. We systematically evaluate various LLMs and discover significant differences in their performance on this task. We find that strong LLMs like GPT-4 outperform human players by a large margin. We further employ Behavior Cloning (BC) to examine whether a weaker model is capable of imitating a stronger model and generalizing to data or domains, using only the demonstrations from a stronger model. We finally propose to use Reinforcement Learning to enhance reasoning and planning capacity of Vicuna models through episodes of game playing, which lead to significant performance improvement. We hope that this problem offers insights into how autonomous agents could be trained to behave more intelligently in ambiguous circumstances.
+
+  Translated Abstract: 大型语言模型（LLM）可有效回答明确提出的问题。但是，当面对模棱两可的查询时，它们可以不可预测并产生不正确的产出。这强调了能够开发能够提出澄清问题以有效解决歧义的智能代理的需求。此功能需要复杂的理解，状态跟踪，推理和计划，以多次对话转弯。但是，直接测量这一点可能具有挑战性。在本文中，我们提供了一个代孕问题，该问题评估了LLMS通过向法官询问一系列疑问来推论自身未知的实体，但向法官揭示的能力。该实体脱颖而出的游戏可以作为评估框架，以探究语言模型的对话推理和计划功能。我们系统地评估了各种LLM，并发现其在此任务上的性能上有显着差异。我们发现，像GPT-4这样的强大LLM胜过了人类玩家的球员。我们进一步采用行为克隆（BC）来检查较弱的模型是否能够模仿更强大的模型并推广到数据或域，仅使用更强模型的演示。我们终于建议使用强化学习，通过游戏发作来增强Vicuna模型的推理和计划能力，从而显着提高性能。我们希望这个问题能为如何在模棱两可的情况下训练如何更聪明地训练自主代理。
+
+
+7. Title: FedBPT: Efficient Federated Black-box Prompt Tuning for Large Language  Models
+   Link: https://arxiv.org/abs/2310.01467
+   Classification Answer: yes
+
+   Abstract: Pre-trained language models (PLM) have revolutionized the NLP landscape, achieving stellar performances across diverse tasks. These models, while benefiting from vast training data, often require fine-tuning on specific data to cater to distinct downstream tasks. However, this data adaptation process has inherent security and privacy concerns, primarily when leveraging user-generated, device-residing data. Federated learning (FL) provides a solution, allowing collaborative model fine-tuning without centralized data collection. However, applying FL to finetune PLMs is hampered by challenges, including restricted model parameter access, high computational requirements, and communication overheads. This paper introduces Federated Black-box Prompt Tuning (FedBPT), a framework designed to address these challenges. FedBPT does not require the clients to access the model parameters. By focusing on training optimal prompts and utilizing gradient-free optimization methods, FedBPT reduces the number of exchanged variables, boosts communication efficiency, and minimizes computational and storage costs. Experiments highlight the framework's ability to drastically cut communication and memory costs while maintaining competitive performance. Ultimately, FedBPT presents a promising solution for efficient, privacy-preserving fine-tuning of PLM in the age of large language models.
+
+  Translated Abstract: 预训练的语言模型（PLM）彻底改变了NLP的景观，从而在各种任务中实现了出色的表演。这些模型虽然受益于广泛的培训数据，但通常需要对特定数据进行微调，以迎合不同的下游任务。但是，此数据适应过程具有固有的安全性和隐私问题，主要是在利用用户生成的设备固定数据时。联合学习（FL）提供了一个解决方案，可以在没有集中数据收集的情况下进行协作模型进行微调。但是，将FL应用于Finetune PLM会受到挑战的阻碍，包括限制模型参数访问，高计算要求和通信开销。本文介绍了联合黑框提示调整（FEDBPT），该框架旨在应对这些挑战。FedBpt不需要客户访问模型参数。通过专注于培训最佳提示并利用无梯度优化方法，FEDBPT减少了交换变量的数量，提高了通信效率，并最大程度地降低了计算和存储成本。实验突出了该框架在保持竞争性能的同时大幅度削减沟通和记忆成本的能力。最终，FedBPT为大语模型时代的PLM进行了有效的，保护隐私的微调提供了有希望的解决方案。
+
+
+8. Title: Fooling the Textual Fooler via Randomizing Latent Representations
+   Link: https://arxiv.org/abs/2310.01452
+   Classification Answer: yes
+
+   Abstract: Despite outstanding performance in a variety of NLP tasks, recent studies have revealed that NLP models are vulnerable to adversarial attacks that slightly perturb the input to cause the models to misbehave. Among these attacks, adversarial word-level perturbations are well-studied and effective attack strategies. Since these attacks work in black-box settings, they do not require access to the model architecture or model parameters and thus can be detrimental to existing NLP applications. To perform an attack, the adversary queries the victim model many times to determine the most important words in an input text and to replace these words with their corresponding synonyms. In this work, we propose a lightweight and attack-agnostic defense whose main goal is to perplex the process of generating an adversarial example in these query-based black-box attacks; that is to fool the textual fooler. This defense, named AdvFooler, works by randomizing the latent representation of the input at inference time. Different from existing defenses, AdvFooler does not necessitate additional computational overhead during training nor relies on assumptions about the potential adversarial perturbation set while having a negligible impact on the model's accuracy. Our theoretical and empirical analyses highlight the significance of robustness resulting from confusing the adversary via randomizing the latent space, as well as the impact of randomization on clean accuracy. Finally, we empirically demonstrate near state-of-the-art robustness of AdvFooler against representative adversarial word-level attacks on two benchmark datasets.
+
+  Translated Abstract: 尽管在各种NLP任务中都表现出色，但最近的研究表明，NLP模型容易受到对抗性攻击的影响，这些攻击略微扰乱了输入，从而导致模型不良。在这些攻击中，对抗性的单词级扰动是经过充分研究的有效攻击策略。由于这些攻击在Black-Box设置中起作用，因此它们不需要访问模型体系结构或模型参数，因此可能对现有的NLP应用程序有害。为了执行攻击，对手多次查询受害者模型，以确定输入文本中最重要的单词，并用其相应的同义词替换这些单词。在这项工作中，我们提出了一种轻巧和攻击性的防御，其主要目标是使在这些基于查询的黑盒子攻击中产生对抗性示例的过程。那是为了愚弄文字傻瓜。该辩护名为AdvFooler，通过在推理时间随机化输入的潜在表示。与现有防御措施不同，AdvFooler在培训期间不需要额外的计算开销，也不依赖于对潜在的对抗扰动集的假设，同时对模型的准确性产生可忽略的影响。我们的理论和经验分析强调了通过随机使潜在空间混淆对手而导致的鲁棒性的重要性，以及随机化对清洁准确性的影响。最后，我们从经验上证明了AdvFooler几乎最先进的鲁棒性，以防止在两个基准数据集中对代表性的对抗词级攻击。
+
+
+9. Title: Meta Semantic Template for Evaluation of Large Language Models
+   Link: https://arxiv.org/abs/2310.01448
+   Classification Answer: yes
+
+   Abstract: Do large language models (LLMs) genuinely understand the semantics of the language, or just memorize the training data? The recent concern on potential data contamination of LLMs has raised awareness of the community to conduct research on LLMs evaluation. In this paper, we propose MSTemp, an approach that creates meta semantic templates to evaluate the semantic understanding ability of LLMs. The core of MSTemp is not to perform evaluation directly on existing benchmark datasets, but to generate new out-of-distribution (OOD) evaluation sets using existing datasets as seeds. Specifically, for a given sentence, MSTemp leverages another language model to generate new samples while preserving its semantics. The new samples are called semantic templates to the original sentence. Then, MSTemp generates evaluation samples via sentence parsing and random word replacement on the semantic templates. MSTemp is highly flexible, dynamic, and cost-effective. Our initial experiments show that MSTemp-generated samples can significantly reduce the performance of LLMs using existing datasets as seeds. We hope this initial work can shed light on future research of LLMs evaluation.
+
+  Translated Abstract: 大型语言模型（LLMS）是否真正了解语言的语义，或者只是记住培训数据？最近对LLM的潜在数据污染的关注使人们对社区进行了对LLMS评估的研究的认识。在本文中，我们提出了MSTEMP，这种方法可以创建元语义模板来评估LLMS的语义理解能力。MSTEMP的核心不是直接在现有基准数据集上执行评估，而是要使用现有数据集作为种子生成新的分布（OOD）评估集。具体而言，对于给定的句子，MSTEMP利用另一个语言模型在保留其语义的同时生成新样本。新样本称为原始句子的语义模板。然后，MSTEMP通过句子解析和语义模板上的随机单词替换生成评估样本。MSTEMP具有高度灵活，动态和成本效益。我们的最初实验表明，使用现有数据集作为种子，MSTEMP生成的样品可以显着降低LLM的性能。我们希望这项最初的工作能够阐明LLMS评估的未来研究。
+
+
+10. Title: Adaptive-Solver Framework for Dynamic Strategy Selection in Large  Language Model Reasoning
+   Link: https://arxiv.org/abs/2310.01446
+   Classification Answer: yes
+
