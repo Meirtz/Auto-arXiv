@@ -34,7 +34,7 @@ export OPENAI_API_KEY='your-api-key'
 ```
 3. Run the script:
 ```bash
-python script.py
+python main.py
 ```
 The script will extract research papers from the specified arXiv URL, classify them based on their relevance to LLMs, translate the abstracts, and save the information in a text file named `llm_related_papers_<today's-date>.txt`.
 
