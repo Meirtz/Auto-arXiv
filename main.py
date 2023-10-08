@@ -21,37 +21,13 @@ class LLMClassifier:
         self.max_tokens = max_tokens
         self.temperature = temperature
     
-    def classify(self, title, max_retries=3, retry_delay=5):
-        prompt = (f"Given the title '{title}', would you categorize this paper "
-                  f"as belonging to the field of Large Language Models (LLM), "
-                  f"which includes topics like training large-scale neural networks, "
-                  f"natural language processing, and language model fine-tuning?")
-        retries = 0
-        while retries < max_retries:
-            try:
-                response = openai.ChatCompletion.create(
-                    model=self.model,
-                    messages=[
-                        {"role": "system", "content": "You are a helpful assistant."},
-                        {"role": "user", "content": prompt}
-                    ],
-                    max_tokens=self.max_tokens,
-                    temperature=self.temperature
-                )
-                answer = response['choices'][0]['message']['content'].strip()
-                print(f"Answer: {answer}")
-                is_llm_related = self.parse(answer)
-                return is_llm_related, answer  # Return both the classification and the answer
-            except openai.error.ServiceUnavailableError:
-                print(f"Service unavailable, retrying in {retry_delay} seconds... ({retries+1}/{max_retries})")
-                retries += 1
-                time.sleep(retry_delay)
-        raise Exception(f"Max retries reached. Could not classify title: {title}")
-    
-    def parse(self, answer, max_retries=3, retry_delay=5):
-        parsing_prompt = (
-            f"Based on the statement: '{answer}', determine if it indicates a positive or negative response "
-            "to the query about relevance to Large Language Models (LLM) field. Please respond with 'yes' or 'no' only."
+    def classify(self, title, max_retries=10, retry_delay=5):
+        prompt = (
+            f"Given the title '{title}', would you categorize this paper "
+            f"as belonging to the field of Large Language Models (LLM), "
+            f"which includes topics like training large-scale neural networks, "
+            f"natural language processing, and language model fine-tuning? "
+            f"If yes, respond with 'yes'. If no, respond with 'no'."
         )
         retries = 0
         while retries < max_retries:
@@ -59,20 +35,19 @@ class LLMClassifier:
                 response = openai.ChatCompletion.create(
                     model=self.model,
                     messages=[
-                        {"role": "system", "content": "You are a helpful assistant."},
-                        {"role": "user", "content": parsing_prompt}
+                        {"role": "system", "content": f"You are a helpful assistant tasked to classify titles based on the provided prompt: {prompt}"},
                     ],
                     max_tokens=self.max_tokens,
                     temperature=self.temperature
                 )
-                parsed_answer = response['choices'][0]['message']['content'].strip().lower()
-                print(f"Parsed Answer: {parsed_answer}")
-                return 'yes' in parsed_answer
+                answer = response['choices'][0]['message']['content'].strip().lower()
+                print(f"Answer: {answer}")
+                return answer == 'yes', answer  # Return both the classification and the answer
             except openai.error.ServiceUnavailableError:
                 print(f"Service unavailable, retrying in {retry_delay} seconds... ({retries+1}/{max_retries})")
                 retries += 1
                 time.sleep(retry_delay)
-        raise Exception(f"Max retries reached. Could not parse answer: {answer}")
+        raise Exception(f"Max retries reached. Could not classify title: {title}")
     
     def translate(self, text, target_language='zh-cn'):
         translator = Translator()
