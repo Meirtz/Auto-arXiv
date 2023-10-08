@@ -4,6 +4,7 @@ import openai
 import os
 from googletrans import Translator
 import datetime
+import time
 
 
 class LLMClassifier:
@@ -20,44 +21,58 @@ class LLMClassifier:
         self.max_tokens = max_tokens
         self.temperature = temperature
     
-    def classify(self, title):
+    def classify(self, title, max_retries=3, retry_delay=5):
         prompt = (f"Given the title '{title}', would you categorize this paper "
-          f"as belonging to the field of Large Language Models (LLM), "
-          f"which includes topics like training large-scale neural networks, "
-          f"natural language processing, and language model fine-tuning?")
-        response = openai.ChatCompletion.create(
-            model=self.model,
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": prompt}
-            ],
-            max_tokens=self.max_tokens,
-            temperature=self.temperature
-        )
-        answer = response['choices'][0]['message']['content'].strip()
-        print(f"Answer: {answer}")
-        is_llm_related = self.parse(answer)
-        return is_llm_related, answer  # Return both the classification and the answer
+                  f"as belonging to the field of Large Language Models (LLM), "
+                  f"which includes topics like training large-scale neural networks, "
+                  f"natural language processing, and language model fine-tuning?")
+        retries = 0
+        while retries < max_retries:
+            try:
+                response = openai.ChatCompletion.create(
+                    model=self.model,
+                    messages=[
+                        {"role": "system", "content": "You are a helpful assistant."},
+                        {"role": "user", "content": prompt}
+                    ],
+                    max_tokens=self.max_tokens,
+                    temperature=self.temperature
+                )
+                answer = response['choices'][0]['message']['content'].strip()
+                print(f"Answer: {answer}")
+                is_llm_related = self.parse(answer)
+                return is_llm_related, answer  # Return both the classification and the answer
+            except openai.error.ServiceUnavailableError:
+                print(f"Service unavailable, retrying in {retry_delay} seconds... ({retries+1}/{max_retries})")
+                retries += 1
+                time.sleep(retry_delay)
+        raise Exception(f"Max retries reached. Could not classify title: {title}")
     
-    def parse(self, answer):
-        # Use GPT-4 to further analyze the answer
+    def parse(self, answer, max_retries=3, retry_delay=5):
         parsing_prompt = (
             f"Based on the statement: '{answer}', determine if it indicates a positive or negative response "
             "to the query about relevance to Large Language Models (LLM) field. Please respond with 'yes' or 'no' only."
         )
-        response = openai.ChatCompletion.create(
-            model=self.model,
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": parsing_prompt}
-            ],
-            max_tokens=self.max_tokens,
-            temperature=self.temperature
-        )
-        parsed_answer = response['choices'][0]['message']['content'].strip().lower()
-        print(f"Parsed Answer: {parsed_answer}")
-        # check if answer cotainin yes
-        return 'yes' in parsed_answer
+        retries = 0
+        while retries < max_retries:
+            try:
+                response = openai.ChatCompletion.create(
+                    model=self.model,
+                    messages=[
+                        {"role": "system", "content": "You are a helpful assistant."},
+                        {"role": "user", "content": parsing_prompt}
+                    ],
+                    max_tokens=self.max_tokens,
+                    temperature=self.temperature
+                )
+                parsed_answer = response['choices'][0]['message']['content'].strip().lower()
+                print(f"Parsed Answer: {parsed_answer}")
+                return 'yes' in parsed_answer
+            except openai.error.ServiceUnavailableError:
+                print(f"Service unavailable, retrying in {retry_delay} seconds... ({retries+1}/{max_retries})")
+                retries += 1
+                time.sleep(retry_delay)
+        raise Exception(f"Max retries reached. Could not parse answer: {answer}")
     
     def translate(self, text, target_language='zh-cn'):
         translator = Translator()
