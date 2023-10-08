@@ -49,10 +49,22 @@ class LLMClassifier:
                 time.sleep(retry_delay)
         raise Exception(f"Max retries reached. Could not classify title: {title}")
     
-    def translate(self, text, target_language='zh-cn'):
+     def translate(self, text, target_language='zh-cn', max_retries=5, retry_delay=2):
         translator = Translator()
-        translated = translator.translate(text, dest=target_language)
-        return translated.text
+        retries = 0
+        
+        while retries < max_retries:
+            try:
+                translated = translator.translate(text, dest=target_language)
+                return translated.text
+            except Exception as e:  # Catching all exceptions, consider specifying the exception types if known.
+                print(f"Translation failed: {e}. Retrying {retries + 1}/{max_retries}...")
+                retries += 1
+                time.sleep(retry_delay)
+        
+        print(f"Translation failed after {max_retries} retries. Returning original text.")
+        return text  # Return the original text if translation fails after max retries.
+
 
 
 class PageParser:
