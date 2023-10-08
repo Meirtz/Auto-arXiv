@@ -82,15 +82,23 @@ class PageParser:
     
         return papers
     
-    def extract_abstract(self, url):
-        response = requests.get(url)
-        response.raise_for_status()
-        soup = BeautifulSoup(response.content, 'html.parser')
-        abstract_block = soup.find('blockquote', class_='abstract')
-        if abstract_block:
-            abstract_text = abstract_block.text.replace('Abstract:', '').strip()
-            return abstract_text
-        return None
+    def extract_abstract(self, url, max_retries=10, retry_delay=5):
+        retries = 0
+        while retries < max_retries:
+            try:
+                response = requests.get(url)
+                response.raise_for_status()
+                soup = BeautifulSoup(response.content, 'html.parser')
+                abstract_block = soup.find('blockquote', class_='abstract')
+                if abstract_block:
+                    abstract_text = abstract_block.text.replace('Abstract:', '').strip()
+                    return abstract_text
+            except (requests.exceptions.RequestException, requests.exceptions.SSLError) as e:
+                print(f"Exception: {e}. Retrying in {retry_delay} seconds... ({retries+1}/{max_retries})")
+                retries += 1
+                time.sleep(retry_delay)
+        print(f"Max retries reached. Could not extract abstract from URL: {url}")
+        return "Unable to extract abstract"
 
 
 
