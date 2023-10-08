@@ -71,28 +71,43 @@ class PageParser:
     def __init__(self):
         pass  # No initialization needed for now
     
-    def extract_papers(self, url):
+    def extract_papers(self, url, max_retries=5, retry_delay=2):
         papers = []
+        retries = 0
+
+        while retries < max_retries:
+            try:
+                # Send HTTP GET request to fetch the page content
+                response = requests.get(url)
+                response.raise_for_status()  # Check if the request was successful
+
+                # Parse the HTML content using BeautifulSoup
+                soup = BeautifulSoup(response.content, 'html.parser')
     
-        # Send HTTP GET request to fetch the page content
-        response = requests.get(url)
-        response.raise_for_status()  # Check if the request was successful
+                # Find all <dt> elements, each representing a paper entry
+                paper_entries = soup.find_all('dt')
     
-        # Parse the HTML content using BeautifulSoup
-        soup = BeautifulSoup(response.content, 'html.parser')
+                # Iterate through each paper entry and extract the title and link
+                for entry in paper_entries:
+                    title_element = entry.find_next('div', class_='list-title')
+                    title = title_element.text.replace('Title: ', '').strip()
+                    link_element = entry.find('a', title='Abstract')
+                    link = 'https://arxiv.org' + link_element['href']
+                    papers.append({'title': title, 'link': link})
     
-        # Find all <dt> elements, each representing a paper entry
-        paper_entries = soup.find_all('dt')
-    
-        # Iterate through each paper entry and extract the title and link
-        for entry in paper_entries:
-            title_element = entry.find_next('div', class_='list-title')
-            title = title_element.text.replace('Title: ', '').strip()
-            link_element = entry.find('a', title='Abstract')
-            link = 'https://arxiv.org' + link_element['href']
-            papers.append({'title': title, 'link': link})
-    
-        return papers
+                return papers  # Return the papers if no exception was raised
+
+            except requests.exceptions.RequestException as e:
+                print(f"Network error: {e}. Retrying {retries + 1}/{max_retries}...")
+            except Exception as e:
+                print(f"An error occurred: {e}. Retrying {retries + 1}/{max_retries}...")
+            finally:
+                retries += 1
+                time.sleep(retry_delay)
+
+        print(f"Failed to extract papers after {max_retries} retries.")
+        return []  # Return an empty list if the maximum number of retries is reached
+
     
     def extract_abstract(self, url, max_retries=10, retry_delay=5):
         retries = 0
